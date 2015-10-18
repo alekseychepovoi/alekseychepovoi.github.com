@@ -1,0 +1,10 @@
+.bold {
+  font-weight: 400;
+}
+gm-map {
+  display: block;
+  width: 1000px;
+  height: 600px;
+  position: relative;
+  margin: 0 auto;
+}

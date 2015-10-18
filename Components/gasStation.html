@@ -1,0 +1,35 @@
+<div id="gasStation" style="text-align: center">
+    <h1>Gas stations calculator</h1>
+
+    <form novalidate style="margin-bottom: 30px;">
+        <label for="latitude">latitude</label>
+        <input id="latitude" ng-model="vm.filterParams.latitude" style="margin-right: 15px;">
+
+        <label for="longitude">longitude</label>
+        <input id="longitude" ng-model="vm.filterParams.longitude" style="margin-right: 15px;">
+
+        <label for="distance">distance (miles)</label>
+        <input id="distance" ng-model="vm.filterParams.distance" style="margin-right: 15px;">
+
+        <button ng-click="vm.filterItems()">Filter</button>
+    </form>
+
+    <h3 style="margin-bottom: 30px;">Number of stations: {{vm.numberOfStations}}</h3>
+
+    <div style="margin-bottom: 10px;">
+        <label for="showInfoForAllItems">Show info for all map items</label>
+        <input id="showInfoForAllItems" type="checkbox" ng-model="vm.showInfoForAllItems" style="position: relative; top: 2px;">
+    </div>
+
+    <gm-map options="{center: [vm.mapParams.latitude, vm.mapParams.longitude], zoom: vm.mapParams.zoom, mapTypeId: google.maps.MapTypeId.ROADMAP}">
+        <gm-marker options="{position: [option.latitude, option.longitude]}" ng-repeat="option in vm.markersOptions">
+            <gm-infowindow ng-if="vm.showInfoForAllItems" options="{content: option.info}"></gm-infowindow>
+        </gm-marker>
+
+        <gm-circle
+                center="map.getCenter()"
+                options="{radius: vm.filterParams.distance, strokeColor: 'blue'}"
+                >
+        </gm-circle>
+    </gm-map>
+</div>
